@@ -3,8 +3,9 @@ $(function() {
   function taskHtml(task) {
     var checkedStatus = task.done ? "checked" : "";
     var liClass = task.done ? "completed" : "";
-    var liElement = '<li id="listItem-' + task.id + '"  class="' + liClass + '">' +
+    var liElement = '<li id="listItem-' + task.id +'" class="' + liClass + '">' +
     '<div class="view"><input class="toggle" type="checkbox"' +
+      " data-id='" + task.id + "'" +
       checkedStatus +
       '><label>' +
        task.title +
@@ -12,7 +13,6 @@ $(function() {
 
     return liElement;
   }
-
 
   function toggleTask(e) {
     var itemId = $(e.target).data("id");
@@ -29,6 +29,7 @@ $(function() {
       var $li = $("#listItem-" + data.id);
       $li.replaceWith(liHtml);
       $('.toggle').change(toggleTask);
+
     } );
   }
 
@@ -59,7 +60,6 @@ $(function() {
       var ulTodos = $('.todo-list');
       ulTodos.append(htmlString);
       $('.toggle').click(toggleTask);
-      $('.new-todo').val('');
     });
   });
 
